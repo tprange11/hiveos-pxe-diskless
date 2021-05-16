@@ -243,12 +243,12 @@ else
 	echo -e "${GREEN}OK${NOCOLOR}"
 fi
 #making uefi
-grub-mkimage -d /usr/lib/grub/x86_64-efi/ -O x86_64-efi -o /pxeserver/tftp/efi/grubnetx64.efi --prefix="(tftp,$IP)/efi" efinet tftp efi_uga efi_gop http
-chmod -R 777 /pxeserver/
+grub-mkimage -d /usr/lib/grub/x86_64-efi/ -O x86_64-efi -o $mydir/tftp/efi/grubnetx64.efi --prefix="(tftp,$IP)/efi" efinet tftp efi_uga efi_gop http
+chmod -R 777 $mydir/
 #make sed /pxeserver/tftp/efi/grub.cfg
-sed -i "/set net_default_server=/c set net_default_server=$IP" /pxeserver/tftp/efi/grub.cfg
-sed -i "/set fs_size=/c set fs_size=${FS_SIZE}M" /pxeserver/tftp/efi/grub.cfg
-sed -i "/set arch_name=/c set arch_name=$ARCH_NAME" /pxeserver/tftp/efi/grub.cfg
+sed -i "/set net_default_server=/c set net_default_server=$IP" $mydir/tftp/efi/grub.cfg
+sed -i "/set fs_size=/c set fs_size=${FS_SIZE}M" $mydir/tftp/efi/grub.cfg
+sed -i "/set arch_name=/c set arch_name=$ARCH_NAME" $mydir/tftp/efi/grub.cfg
 #finished making uefi
 echo
 [[ $res != 0 ]] && echo -e "${RED}Server install failed${NOCOLOR}" && exit 1
